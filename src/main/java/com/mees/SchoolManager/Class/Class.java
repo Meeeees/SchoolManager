@@ -5,7 +5,6 @@ import jakarta.persistence.*;
 
 import java.util.Date;
 
-@Entity
 public class Class {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -14,7 +13,7 @@ public class Class {
     private String name;
     private String room;
 
-    @ManyToOne
+    @ManyToMany
     @JoinColumn(name = "teacher_id")
     private Teacher teacher;
 

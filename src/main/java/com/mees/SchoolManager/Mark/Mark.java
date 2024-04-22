@@ -4,7 +4,6 @@ import com.mees.SchoolManager.Student.Student;
 import com.mees.SchoolManager.Teacher.Teacher;
 import jakarta.persistence.*;
 
-@Entity
 public class Mark {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -12,11 +11,11 @@ public class Mark {
 
     private Float mark;
 
-    @ManyToOne
+    @ManyToMany
     @JoinColumn(name = "teacher_id")
     private Teacher teacher;
 
-    @ManyToOne
+    @ManyToMany
     @JoinColumn(name = "student_id")
     private Student student;
 

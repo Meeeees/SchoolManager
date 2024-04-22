@@ -17,7 +17,7 @@ public class Teacher {
     private String topic;
 
     // Getters and setters
-
+public Teacher() {}
     public Teacher(String firstName, String lastName, String email, String topic) {
         this.firstName = firstName;
         this.lastName = lastName;

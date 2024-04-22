@@ -5,20 +5,22 @@ import com.mees.SchoolManager.Class.Class;
 import jakarta.persistence.*;
 
 
-@Entity
-@Table(name = "class_student")
 public class ClassStudent {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
 
     @ManyToOne
-    @JoinColumn(name = "student_id")
-    private Student student;
+    @JoinTable(name = "class_student",
+            joinColumns = @JoinColumn(name = "class_id"),
+            inverseJoinColumns = @JoinColumn(name = "student_id"))
+    private Class clazz;
 
     @ManyToOne
-    @JoinColumn(name = "class_id")
-    private Class clazz;
+    @JoinTable(name = "class_student",
+            joinColumns = @JoinColumn(name = "student_id"),
+            inverseJoinColumns = @JoinColumn(name = "class_id"))
+    private Student student;
 
     public ClassStudent(Student student, Class clazz) {
         this.student = student;

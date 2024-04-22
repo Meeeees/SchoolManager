@@ -3,8 +3,11 @@ package com.mees.SchoolManager.Student;
 import com.mees.SchoolManager.Teacher.Teacher;
 import jakarta.persistence.*;
 
+import java.time.LocalDate;
+
 
 @Entity
+@Table(name = "student")
 public class Student {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -20,12 +23,26 @@ public class Student {
     @JoinColumn(name = "mentor_id")
     private Teacher mentor;
 
+    private LocalDate dob;
+
     // Getters and setters
-    public Student(String firstName, String lastName, String email, Teacher mentor) {
+
+    public Student() {}
+
+    public Student(String firstName, String lastName, String email, Teacher mentor, LocalDate dob) {
         this.firstName = firstName;
         this.lastName = lastName;
         this.email = email;
         this.mentor = mentor;
+        this.dob = dob;
+    }
+
+    public LocalDate getDob() {
+        return dob;
+    }
+
+    public void setDob(LocalDate dob) {
+        this.dob = dob;
     }
 
     public String getFirstName() {
