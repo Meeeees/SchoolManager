@@ -1,9 +1,13 @@
 package com.mees.SchoolManager.Student;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.mees.SchoolManager.SchoolClass.SchoolClass;
 import com.mees.SchoolManager.Teacher.Teacher;
 import jakarta.persistence.*;
 
 import java.time.LocalDate;
+import java.util.HashSet;
+import java.util.Set;
 
 
 @Entity
@@ -15,6 +19,7 @@ public class Student {
 
     private String firstName;
     private String lastName;
+    private String password;
 
     @Column(unique = true)
     private String email;
@@ -25,16 +30,28 @@ public class Student {
 
     private LocalDate dob;
 
-    // Getters and setters
+    @JsonIgnore
+    @ManyToMany(mappedBy = "students")
+    private Set<SchoolClass> SchoolClasses;
 
-    public Student() {}
+    public Student() {
+    }
 
-    public Student(String firstName, String lastName, String email, Teacher mentor, LocalDate dob) {
+    public Student(String firstName, String lastName, String password, String email, Teacher mentor, LocalDate dob) {
         this.firstName = firstName;
         this.lastName = lastName;
+        this.password = password;
         this.email = email;
         this.mentor = mentor;
         this.dob = dob;
+    }
+
+    public String getPassword() {
+        return password;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
     }
 
     public LocalDate getDob() {
@@ -77,4 +94,15 @@ public class Student {
         this.mentor = mentor;
     }
 
+    public Set<SchoolClass> getSchoolClasses() {
+        if (SchoolClasses == null) {
+            SchoolClasses = new HashSet<>();
+        }
+        return SchoolClasses;
+    }
+
+    @Override
+    public String toString() {
+        return "Student: " + firstName + " " + lastName;
+    }
 }
